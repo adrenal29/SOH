@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/industry.css">
+    <title>Industry Login</title>
+</head>
+<body>
+    <div class="login">
+        <h2>Sign In as Industry</h2>
+        <input placeholder="Enter Email" class="id">
+        <input placeholder="Enter Password" type="password" id="pwd">
+        <button onClick="signUp()">Sign Up now</h4></button>
+    </div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase.js"></script>
+<script>
+    var firebaseConfig ={
+    apiKey: "AIzaSyApAlQUmDSl7jxMQAmamlOsQqHc-sJimZ0",
+     authDomain: "sharezop.firebaseapp.com",
+    projectId: "sharezop",
+    storageBucket: "sharezop.appspot.com",
+    messagingSenderId: "509652847690",
+    appId: "1:509652847690:web:dd6a8394e6ad0e09c6aab3",
+    measurementId: "G-V03FKW657M"
+    };
+     firebase.initializeApp(firebaseConfig);
+     function signUp(){
+    let obj = firebase.database().ref("industry");
+    var email=document.querySelector(".id").value;
+    var pwd=document.querySelector("#pwd").value;
+    firebase.auth().createUserWithEmailAndPassword(email, pwd)
+  .then((userCredential) => {
+    // Signed in 
+    var user = userCredential.user;
+    console.log(user.email)
+     location.assign("/industry/user="+user.email)
+    // ...
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ..
+  });
+}
+</script>
+
+</html>

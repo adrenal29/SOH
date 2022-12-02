@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/iDashboard.css" />
+    <title>Industry Dashboard</title>
+    <style>
+      button {
+        width: 12rem;
+        height: 2.3rem;
+        margin-left: 3rem;
+        margin-top: 1rem;
+        background: black;
+        color: white;
+        border: none;
+        border-radius: 20px;
+      }
+      .industry {
+        display: flex;
+      }
+      .left div input,
+      .right div input {
+        outline: none;
+        height: 2rem;
+        width: 14rem;
+        margin-left: 10%;
+        margin-top: 0.4rem;
+      }
+      .left {
+        width: 50vw;
+        margin-left: 4vw;
+      }
+      .left div {
+        height: 45vh;
+        background: whitesmoke;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 5vh;
+      }
+      .right div {
+        height: 45vh;
+        background: whitesmoke;
+        width: 40vw;
+        display: flex;
+        flex-direction: column;
+        margin-top: 5vh;
+      }
+      .left div h2,
+      .right div h2 {
+        padding: 5%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="industry">
+      <h2 class="user"></h2>
+      <div class="left">
+        <div>
+          <h2>Add an item for Local Market</h2>
+          <input placeholder="Enter Item name" class="sell" />
+          <input placeholder="Enter Selling price" class="price" />
+          <button onclick="addItem()">Add Item</button>
+        </div>
+        <div>
+          <h2>Launch new bid</h2>
+          <input placeholder="Enter Waste Category" class="cat" />
+          <input placeholder="Enter Weight in Tonnes" class="weight" />
+          <button onclick="Bid()">Add for Bidding</button>
+        </div>
+      </div>
+      <div class="right">
+        <div>
+          <h2>Update your Information</h2>
+          <input placeholder="Enter Industry Type" class="type" />
+          <input placeholder="Enter  License Number" class="license" />
+          <button onclick="update()">Update Now</button>
+        </div>
+        <div>
+          <h2>Submit Yearly Waste Report</h2>
+          <label style="margin-left: 4vw" for="avatar"
+            >Choose your financial report</label
+          >
+
+          <input
+            type="file"
+            id="avatar"
+            name="avatar"
+            accept="image/png, image/jpeg"
+          />
+          <button>SUBMIT</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyApAlQUmDSl7jxMQAmamlOsQqHc-sJimZ0",
+      authDomain: "sharezop.firebaseapp.com",
+      projectId: "sharezop",
+      storageBucket: "sharezop.appspot.com",
+      messagingSenderId: "509652847690",
+      appId: "1:509652847690:web:dd6a8394e6ad0e09c6aab3",
+      measurementId: "G-V03FKW657M",
+    };
+    firebase.initializeApp(firebaseConfig);
+    function addItem() {
+      var sp = document.getElementsByClassName("sell");
+      var price = document.getElementsByClassName("price");
+      firebase
+        .database()
+        .ref("sale/" + 'i1')
+        .set(
+          {
+            sellingItem:sp,
+            price:price
+          },
+          (error) => {
+            if (error) {
+              // The write failed...
+              console.log("Failes")
+            } else {
+              // Data saved successfully!
+              console.log("Added")
+            }
+          }
+        );
+    }
+    function Bid() {
+      var category = document.getElementById("cat");
+      var weight = document.getElementById("weight");
+    }
+    function update() {
+      var type = document.getElementById("type");
+      var license = document.getElementById("license");
+    }
+  </script>
+</html>
